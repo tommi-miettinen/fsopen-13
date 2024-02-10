@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "outDir": "./build",
+    "allowJs": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "module": "es2022",
+    "target": "es2020"
+  },
+  "exclude": ["node_modules", "build"]
+}
