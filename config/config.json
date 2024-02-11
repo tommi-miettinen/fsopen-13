@@ -1,0 +1,26 @@
+{
+  "development": {
+    "dialect": "postgres",
+    "username": "testi",
+    "password": "testi12345",
+    "database": "fsopen",
+    "host": "localhost",
+    "port": 5432
+  },
+  "test": {
+    "dialect": "postgres",
+    "username": "testi",
+    "password": "testi12345",
+    "database": "fsopen",
+    "host": "localhost",
+    "port": 5432
+  },
+  "production": {
+    "dialect": "postgres",
+    "username": "testi",
+    "password": "testi12345",
+    "database": "fsopen",
+    "host": "localhost",
+    "port": 5432
+  }
+}

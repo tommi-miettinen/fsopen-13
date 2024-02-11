@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import db from "../db.js";
+import { sequelize as db } from "../util/db.js";
 
 const User = db.define("User", {
   name: {
@@ -13,6 +13,8 @@ const User = db.define("User", {
       isEmail: true,
     },
   },
+  admin: { type: DataTypes.BOOLEAN, defaultValue: false },
+  disabled: { type: DataTypes.BOOLEAN, defaultValue: false },
 });
 
 export default User;

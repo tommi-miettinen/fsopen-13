@@ -5,7 +5,7 @@
     "allowJs": true,
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
-    "module": "es2022",
+    "module": "ESNext",
     "target": "es2020"
   },
   "exclude": ["node_modules", "build"]

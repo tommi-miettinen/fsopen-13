@@ -2,8 +2,11 @@ import express from "express";
 import "express-async-errors";
 import { User, Blog } from "./models/index.js";
 import { Sequelize, Op } from "sequelize";
+import { connectToDatabase } from "./util/db.js";
 
 const app = express();
+
+connectToDatabase();
 
 app.use(express.json());
 
@@ -44,6 +47,7 @@ app.get("/api/authors", async (req, res) => {
 
 app.delete("/api/blogs/:id", async (req, res) => {
   const { id } = req.params;
+  const blog = await Blog.findByPk(id);
   const deletedBlog = await Blog.destroy({ where: { id } });
   if (deletedBlog) {
     res.status(204).end();
@@ -91,6 +95,7 @@ const errorHandler = (err, req, res, next) => {
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 3000;
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
