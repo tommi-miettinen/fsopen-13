@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import db from "./db.js";
+import db from "../db.js";
 
 const Blog = db.define("Blog", {
   id: {
@@ -24,7 +24,5 @@ const Blog = db.define("Blog", {
     defaultValue: 0,
   },
 });
-
-Blog.sync();
 
 export default Blog;

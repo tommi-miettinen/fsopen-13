@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import db from "./db.js";
+import db from "../db.js";
 
 const User = db.define("User", {
   name: {
@@ -14,7 +14,5 @@ const User = db.define("User", {
     },
   },
 });
-
-User.sync();
 
 export default User;
