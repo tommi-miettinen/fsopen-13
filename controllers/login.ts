@@ -10,7 +10,7 @@ router.get("/", async (req, res) => {
   res.json(users);
 });
 
-router.post("/", async (request, response) => {
+router.post("/api/login", async (request, response) => {
   const body = request.body;
 
   const user = await User.findOne({

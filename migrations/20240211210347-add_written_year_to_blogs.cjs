@@ -4,7 +4,7 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.addColumn("Blogs", "year", {
       type: Sequelize.DataTypes.INTEGER,
-      allowNull: true,
+      allowNull: false,
       validate: {
         isInt: true,
         min: 1991,

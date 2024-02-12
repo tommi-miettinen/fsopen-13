@@ -1,14 +1,18 @@
 import express from "express";
 import "express-async-errors";
-import { User, Blog } from "./models/index.js";
+import { User, Blog, ReadingList, Session } from "./models/index.js";
 import { Sequelize, Op } from "sequelize";
 import { connectToDatabase } from "./util/db.js";
+import { userRouter } from "./controllers/login.js";
+import { tokenExtractor } from "./middleware/tokenExtractor.js";
 
 const app = express();
 
 connectToDatabase();
 
 app.use(express.json());
+
+app.use(tokenExtractor);
 
 app.get("/api/blogs", async (req, res) => {
   let where = {};
@@ -24,6 +28,25 @@ app.get("/api/blogs", async (req, res) => {
     order: [["likes", "DESC"]],
   });
   res.json(blogs);
+});
+
+app.delete("/api/logout", async (req, res) => {
+  //@ts-ignore
+  const user = req.decodedToken;
+
+  await Session.destroy({
+    where: {
+      userId: user.id,
+    },
+  });
+
+  res.send("ok");
+});
+
+app.post("/api/readinglists", async (req, res) => {
+  const { blogId, userId } = req.body;
+  const newReadingList = await ReadingList.create({ blogId, userId });
+  res.status(201).json(newReadingList);
 });
 
 app.post("/api/blogs", async (req, res) => {
@@ -91,6 +114,8 @@ const errorHandler = (err, req, res, next) => {
   console.log(err, "this is the error");
   res.status(statusCode).json({ error: err.message });
 };
+
+app.use(userRouter);
 
 app.use(errorHandler);
 
